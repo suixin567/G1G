@@ -27,15 +27,32 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        tiledMap:{
+            type: cc.TiledMap,
+            default: null,
+        }
     },
 
-    // LIFE-CYCLE CALLBACKS:
+    onLoad: function () {
+        //获取地图
+        this.tiledMap = this.node.getComponent(cc.TiledMap);
+        console.log("地图属性",this.tiledMap.getProperty("minTime"))
 
-    // onLoad () {},
+        //对象层
+        let objLayer = this.tiledMap.getObjectGroup('objLayer');
+        console.log("对象层",objLayer)
+        //获取对象层中的属性
+        let colorRet = objLayer.getObject('color');
+        console.log("对象层的色块",colorRet)
 
-    start () {
+
+
+        var layer = this.tiledMap.getLayer('layer1');        //获取左上角瓦片坐标为（x,y）的图块的像素坐标
+        // var pos = layer.getPositionAt(x,y);        //获得当前该图块的id,注意:这里的id是从1开始的,与TiledMap Editor中显示的不同,如果返回值为0,则为空）
+        // var gid = layer.getTileGIDAt(0,0);
+        console.log("层：",layer)
+
 
     },
 
-    // update (dt) {},
 });
