@@ -30,6 +30,13 @@ cc.Class({
         tiledMap:{
             type: cc.TiledMap,
             default: null,
+        },
+        startPos:{
+            default: cc.v2(0, 0),
+        },
+        Player:{
+            type: cc.Node,
+            default: null,
         }
     },
 
@@ -42,9 +49,12 @@ cc.Class({
         let objLayer = this.tiledMap.getObjectGroup('objLayer');
         console.log("对象层",objLayer)
         //获取对象层中的属性
-        let colorRet = objLayer.getObject('color');
-        console.log("对象层的色块",colorRet)
-
+        let player = objLayer.getObject('player');
+        this.startPos.x = player.x;
+        this.startPos.y = player.y;
+        console.log("对象层的角色",player)
+        this.Player.setPosition( this.startPos.x, this.startPos.y)
+        this.Player.rotation = -player.rotation;
 
 
         var layer = this.tiledMap.getLayer('layer1');        //获取左上角瓦片坐标为（x,y）的图块的像素坐标

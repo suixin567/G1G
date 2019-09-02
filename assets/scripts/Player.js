@@ -17,6 +17,9 @@ cc.Class({
         this.isRun = false;
         this.isLeft = false;
         this.isRight = false;
+        //this.node.setPosition(cc.visibleRect.bottomLeft);
+
+
     },
 
     start () {
