@@ -31,6 +31,7 @@ cc.Class({
         this.Button_go.on('touchend',this._go_end,this);
         this.Button_left.on('touchend',this._left_end,this);
         this.Button_right.on('touchend',this._right_end,this);
+
     },
 
     update (dt) {
@@ -70,4 +71,5 @@ cc.Class({
     _right () {this.isRight = true;},
     _right_end () {this.isRight = false;},
 
+    // update (dt) {},
 });
