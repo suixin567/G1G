@@ -41,10 +41,10 @@ cc.Class({
             manager.enabled = true;
 
     // Enabled draw collider
-            manager.enabledDebugDraw = true;
+    //         manager.enabledDebugDraw = true;
 
     // Enabled draw collider bounding box
-            manager.enabledDrawBoundingBox = true;
+    //         manager.enabledDrawBoundingBox = true;
 
     },
 
@@ -52,7 +52,6 @@ cc.Class({
 
     onCollisionEnter: function (other, self) {
         this.node.color = cc.Color.RED;
-        console.log("碰撞了");
         // this.touchingNumber ++;
 
         // let world = self.world;

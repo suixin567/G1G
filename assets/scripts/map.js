@@ -37,6 +37,10 @@ cc.Class({
         Player:{
             type: cc.Node,
             default: null,
+        },
+        wallPrefab:{
+            type: cc.Prefab,
+            default: null,
         }
     },
 
@@ -58,14 +62,22 @@ cc.Class({
                 if (gid != 0){
                      console.log("gid",gid)
                      var properties = this.tiledMap.getPropertiesForGID(gid);
-                    //
-                    //
+
                     if (gid==50){
                         console.log("Properties!!!: " + properties['type']);
-                    }
+                        let pos = bglayer.getPositionAt(j, i);
+                        cc.log("Pos: " + pos);
 
-                    let pos = bglayer.getPositionAt(j, i);
-                    cc.log("Pos: " + pos);
+                        //创建碰撞体
+                        // let collider = this.getComponent(cc.PhysicsBoxCollider);
+                        // collider.size.width = width;
+                        // collider.size.height = height;
+                        // collider.apply();  // 调用apply以后才会重新生成box2d的相关对象
+                        var loadobj =cc.instantiate(this.wallPrefab);//将预制体克隆到场景
+                        this.node.addChild(loadobj);//将克隆出的物体作为子物体
+                        //设置物体位置
+                        loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
+                    }
                 }
 
             }
