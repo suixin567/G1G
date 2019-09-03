@@ -43,7 +43,35 @@ cc.Class({
     onLoad: function () {
         //获取地图
         this.tiledMap = this.node.getComponent(cc.TiledMap);
-        console.log("地图属性",this.tiledMap.getProperty("minTime"))
+        console.log("地图完整属性",this.tiledMap);
+        //console.log("地图属性",this.tiledMap.getProperty("minTime"))
+
+        var mapSize = this.tiledMap.getMapSize();
+        console.log("地图大小",mapSize);
+        var bglayer = this.tiledMap.getLayer("bg");
+        console.log("背景层",bglayer)
+
+        for (var i=0;i<mapSize.width;i++){
+            for (var j=0;j<mapSize.height;j++){
+                // console.log(i,j);
+                var gid = bglayer.getTileGIDAt(j,i);//获得图块GID
+                if (gid != 0){
+                     console.log("gid",gid)
+                     var properties = this.tiledMap.getPropertiesForGID(gid);
+                    //
+                    //
+                    if (gid==50){
+                        console.log("Properties!!!: " + properties['type']);
+                    }
+
+                    let pos = bglayer.getPositionAt(j, i);
+                    cc.log("Pos: " + pos);
+                }
+
+            }
+        }
+
+
 
         //对象层
         let objLayer = this.tiledMap.getObjectGroup('objLayer');
