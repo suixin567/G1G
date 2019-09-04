@@ -41,30 +41,20 @@ cc.Class({
             manager.enabled = true;
 
     // Enabled draw collider
-            manager.enabledDebugDraw = false;
+            manager.enabledDebugDraw = true;
 
     // Enabled draw collider bounding box
     //         manager.enabledDrawBoundingBox = true;
-
     },
 
     // update (dt) {},
 
     onCollisionEnter: function (other, self) {
-        this.node.color = cc.Color.RED;
-        cc.director.loadScene('game');
-        // this.touchingNumber ++;
-
-        // let world = self.world;
-        // let aabb = world.aabb;
-        // let preAabb = world.preAabb;
-        // let m = world.matrix;
-
-        // for circle collider
-        // let r = world.radius;
-        // let p = world.position;
-
-        // for box collider and polygon collider
-        // let ps = world.points;
+        // this.node.color = cc.Color.RED;
+        //切换场景
+        //cc.director.loadScene("game");
+        var player = this.getComponent('Player');
+        this.node.setPosition(player._StartPos);
+        this.node.angle =player._StartRot;
     },
 });

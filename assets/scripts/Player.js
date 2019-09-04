@@ -7,7 +7,22 @@ cc.Class({
         Button_right   : cc.Node,
         Button_go      : cc.Node,
         // 速度
-        max_speed      : 50
+        max_speed      : 10,
+        StartPos:{
+            type: cc.v2,
+            set (value) {
+                this._StartPos = value;
+                console.log("设置初始位置");
+                this.node.setPosition(value)
+            }
+        },
+        StartRot:{
+            set (value) {
+                this._StartRot = value;
+                console.log("设置初始角度");
+                this.node.angle = value;
+            }
+        },
     },
 
     onLoad () {
@@ -18,8 +33,6 @@ cc.Class({
         this.isLeft = false;
         this.isRight = false;
         //this.node.setPosition(cc.visibleRect.bottomLeft);
-
-
     },
 
     start () {
@@ -28,10 +41,9 @@ cc.Class({
         this.Button_left.on('touchstart',this._left,this);
         this.Button_right.on('touchstart',this._right,this);
         // 松手
-        this.Button_go.on('touchend',this._go_end,this);
+        // this.Button_go.on('touchend',this._go_end,this);
         this.Button_left.on('touchend',this._left_end,this);
         this.Button_right.on('touchend',this._right_end,this);
-
     },
 
     update (dt) {
@@ -52,24 +64,23 @@ cc.Class({
         }
         // 左右转向
         if (this.isLeft) {
-            this.Player.rotation -= 50 * dt;
+            this.Player.angle += 100 * dt;
         }
         if (this.isRight) {
-            this.Player.rotation += 50 * dt;
+            this.Player.angle -= 100 * dt;
         }
         // 主角一直向车头方向走
-        let hudu = cc.misc.degreesToRadians(this.Player.rotation);
+        let hudu = cc.misc.degreesToRadians(-this.Player.angle);
         this.Player.x += this.speed * Math.sin(hudu);
         this.Player.y += this.speed * Math.cos(hudu);
-        // console.log(hudu);
+        // console.log(this.speed);
     },
 
     _go () {this.isRun = true;},
-    _go_end () {this.isRun = false;},
-    _left () {this.isLeft = true;},
+    // _go_end () {this.isRun = false;},
+    _left () {this.isLeft = true;this.isRight=false;},
     _left_end () {this.isLeft = false;},
-    _right () {this.isRight = true;},
+    _right () {this.isRight = true;this.isLeft=false;},
     _right_end () {this.isRight = false;},
 
-    // update (dt) {},
 });

@@ -76,11 +76,11 @@ cc.Class({
                 // console.log(i,j);
                 var gid = bglayer.getTileGIDAt(j,i);//获得图块GID
                 if (gid != 0){
-                     console.log("gid",gid)
+                     //console.log("gid",gid)
                      var properties = this.tiledMap.getPropertiesForGID(gid);
                      var collisionType = properties['ct'];
                      if (collisionType!= undefined){
-                         console.log("图块碰撞类型" ,collisionType);
+                         //console.log("图块碰撞类型" ,collisionType);
                          let pos = bglayer.getPositionAt(j, i);
                          var loadobj = null;
                          switch (collisionType){
@@ -96,34 +96,17 @@ cc.Class({
                              case 4:
                                  loadobj =cc.instantiate(this.wallPrefab3);//将预制体克隆到场景
                                  break;
+                             case 5:
+                                 loadobj =cc.instantiate(this.wallPrefab4);//将预制体克隆到场景
+                                 break;
                          }
                          //设置碰撞体位置
                          this.node.addChild(loadobj);//将克隆出的物体作为子物体
                          loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
                      }
-
-
-                    // let tile = bglayer.getTiledTileAt(1, 1, false);
-                    // console.log("快快" ,tile);
-                    // if (gid==50){
-                    //     console.log("Properties!!!: " + properties['type']);
-                    //     let pos = bglayer.getPositionAt(j, i);
-                    //     cc.log("Pos: " + pos);
-                    //
-                    //     var loadobj =cc.instantiate(this.wallPrefab);//将预制体克隆到场景
-                    //     this.node.addChild(loadobj);//将克隆出的物体作为子物体
-                    //     //设置碰撞体位置
-                    //     loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
-                    // }
                 }
             }
         }
-
-        //创建碰撞体
-        // let collider = this.getComponent(cc.PhysicsBoxCollider);
-        // collider.size.width = width;
-        // collider.size.height = height;
-        // collider.apply();  // 调用apply以后才会重新生成box2d的相关对象
 
         //对象层
         let objLayer = this.tiledMap.getObjectGroup('objLayer');
@@ -133,16 +116,8 @@ cc.Class({
         this.startPos.x = player.x;
         this.startPos.y = player.y;
         console.log("对象层的角色",player)
-        this.Player.setPosition( this.startPos.x, this.startPos.y)
-        this.Player.rotation = -player.rotation;
-
-
-        var layer = this.tiledMap.getLayer('layer1');        //获取左上角瓦片坐标为（x,y）的图块的像素坐标
-        // var pos = layer.getPositionAt(x,y);        //获得当前该图块的id,注意:这里的id是从1开始的,与TiledMap Editor中显示的不同,如果返回值为0,则为空）
-        // var gid = layer.getTileGIDAt(0,0);
-        console.log("层：",layer)
-
-
+        this.Player.getComponent("Player").StartPos = this.startPos;
+        this.Player.getComponent("Player").StartRot = player.rotation;
     },
 
 });
