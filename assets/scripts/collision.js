@@ -41,7 +41,7 @@ cc.Class({
             manager.enabled = true;
 
     // Enabled draw collider
-    //         manager.enabledDebugDraw = true;
+            manager.enabledDebugDraw = true;
 
     // Enabled draw collider bounding box
     //         manager.enabledDrawBoundingBox = true;

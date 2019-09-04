@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "wallPre",
+    "_name": "wallPre4",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -70,7 +70,7 @@
     "_id": ""
   },
   {
-    "__type__": "cc.BoxCollider",
+    "__type__": "cc.PolygonCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -83,11 +83,23 @@
       "x": 0,
       "y": 0
     },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 32,
-      "height": 32
-    },
+    "points": [
+      {
+        "__type__": "cc.Vec2",
+        "x": 16,
+        "y": 16
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 16,
+        "y": -16
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -16,
+        "y": -16
+      }
+    ],
     "_id": ""
   },
   {
@@ -96,9 +108,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "c7cf4598-a602-4183-80ce-e8d0239bd98a"
+      "__id__": 0
     },
-    "fileId": "1fOtFj0p1C6qEEr06A7F0r",
+    "fileId": "10R4Ki40JKSJfg0cDbEqSN",
     "sync": false
   }
 ]

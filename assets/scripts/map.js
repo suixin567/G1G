@@ -41,18 +41,34 @@ cc.Class({
         wallPrefab:{
             type: cc.Prefab,
             default: null,
-        }
+        },
+        wallPrefab1:{
+            type: cc.Prefab,
+            default: null,
+        },
+        wallPrefab2:{
+            type: cc.Prefab,
+            default: null,
+        },
+        wallPrefab3:{
+            type: cc.Prefab,
+            default: null,
+        },
+        wallPrefab4:{
+            type: cc.Prefab,
+            default: null,
+        },
     },
 
     onLoad: function () {
         //获取地图
         this.tiledMap = this.node.getComponent(cc.TiledMap);
-        console.log("地图完整属性",this.tiledMap);
+        // console.log("地图完整属性",this.tiledMap);
         //console.log("地图属性",this.tiledMap.getProperty("minTime"))
 
         var mapSize = this.tiledMap.getMapSize();
-        console.log("地图大小",mapSize);
-        var bglayer = this.tiledMap.getLayer("bg");
+        // console.log("地图大小",mapSize);
+        var bglayer = this.tiledMap.getLayer("bgLayer");
         console.log("背景层",bglayer)
 
         for (var i=0;i<mapSize.width;i++){
@@ -62,28 +78,52 @@ cc.Class({
                 if (gid != 0){
                      console.log("gid",gid)
                      var properties = this.tiledMap.getPropertiesForGID(gid);
+                     var collisionType = properties['ct'];
+                     if (collisionType!= undefined){
+                         console.log("图块碰撞类型" ,collisionType);
+                         let pos = bglayer.getPositionAt(j, i);
+                         var loadobj = null;
+                         switch (collisionType){
+                             case 1:
+                                     loadobj =cc.instantiate(this.wallPrefab);//将预制体克隆到场景
+                                 break;
+                             case 2:
+                                 loadobj =cc.instantiate(this.wallPrefab1);//将预制体克隆到场景
+                                 break;
+                             case 3:
+                                 loadobj =cc.instantiate(this.wallPrefab2);//将预制体克隆到场景
+                                 break;
+                             case 4:
+                                 loadobj =cc.instantiate(this.wallPrefab3);//将预制体克隆到场景
+                                 break;
+                         }
+                         //设置碰撞体位置
+                         this.node.addChild(loadobj);//将克隆出的物体作为子物体
+                         loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
+                     }
 
-                    if (gid==50){
-                        console.log("Properties!!!: " + properties['type']);
-                        let pos = bglayer.getPositionAt(j, i);
-                        cc.log("Pos: " + pos);
 
-                        //创建碰撞体
-                        // let collider = this.getComponent(cc.PhysicsBoxCollider);
-                        // collider.size.width = width;
-                        // collider.size.height = height;
-                        // collider.apply();  // 调用apply以后才会重新生成box2d的相关对象
-                        var loadobj =cc.instantiate(this.wallPrefab);//将预制体克隆到场景
-                        this.node.addChild(loadobj);//将克隆出的物体作为子物体
-                        //设置物体位置
-                        loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
-                    }
+                    // let tile = bglayer.getTiledTileAt(1, 1, false);
+                    // console.log("快快" ,tile);
+                    // if (gid==50){
+                    //     console.log("Properties!!!: " + properties['type']);
+                    //     let pos = bglayer.getPositionAt(j, i);
+                    //     cc.log("Pos: " + pos);
+                    //
+                    //     var loadobj =cc.instantiate(this.wallPrefab);//将预制体克隆到场景
+                    //     this.node.addChild(loadobj);//将克隆出的物体作为子物体
+                    //     //设置碰撞体位置
+                    //     loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
+                    // }
                 }
-
             }
         }
 
-
+        //创建碰撞体
+        // let collider = this.getComponent(cc.PhysicsBoxCollider);
+        // collider.size.width = width;
+        // collider.size.height = height;
+        // collider.apply();  // 调用apply以后才会重新生成box2d的相关对象
 
         //对象层
         let objLayer = this.tiledMap.getObjectGroup('objLayer');
