@@ -58,6 +58,10 @@ cc.Class({
             type: cc.Prefab,
             default: null,
         },
+        Previous: {
+            type:cc.Node,
+            default: null,
+        }
     },
 
     onLoad: function () {
@@ -85,27 +89,48 @@ cc.Class({
                          var loadobj = null;
                          switch (collisionType){
                              case 1:
-                                     loadobj =cc.instantiate(this.wallPrefab);//将预制体克隆到场景
+                                 loadobj = cc.instantiate(this.wallPrefab);//将预制体克隆到场景
+                                 // loadobj.getComponent("Wall").Previous = this.Previous;
+                                 if (this.Previous == null) {
+                                     var boxCollider = loadobj.addComponent(cc.BoxCollider);
+                                     boxCollider.size.width = 32;
+                                     boxCollider.size.height = 32;
+                                     this.Previous = loadobj;
+                                 }else{
+                                     var boxCollider = this.Previous.getComponent(cc.BoxCollider);
+                                     if (boxCollider != null) {
+                                         boxCollider.offset.x += 16;
+                                         boxCollider.size.width += 32;
+                                     }
+                                 }
+
                                  break;
                              case 2:
                                  loadobj =cc.instantiate(this.wallPrefab1);//将预制体克隆到场景
+                                 this.Previous = null;
                                  break;
                              case 3:
                                  loadobj =cc.instantiate(this.wallPrefab2);//将预制体克隆到场景
+                                 this.Previous = null;
                                  break;
                              case 4:
                                  loadobj =cc.instantiate(this.wallPrefab3);//将预制体克隆到场景
+                                 this.Previous = null;
                                  break;
                              case 5:
                                  loadobj =cc.instantiate(this.wallPrefab4);//将预制体克隆到场景
+                                 this.Previous = null;
                                  break;
                          }
                          //设置碰撞体位置
                          this.node.addChild(loadobj);//将克隆出的物体作为子物体
                          loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
                      }
+                }else{
+                    this.Previous = null;//黑块要重置
                 }
             }
+            this.Previous = null;//换行后要重置
         }
 
         //对象层

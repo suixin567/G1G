@@ -189,7 +189,7 @@
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_id": "6aVJBOTSZJv6nvF/m/tV00"
+    "_id": "682F0GMMVDtJJWyqFQj2d2"
   },
   {
     "__type__": "cc.TiledLayer",
@@ -204,7 +204,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_id": "6aZ+TpQqtNZb3YsMpPqUtL"
+    "_id": "94AH3qBb5FG4TC6qLbhBrH"
   },
   {
     "__type__": "cc.Node",
@@ -262,7 +262,7 @@
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_id": "6afI/nDUdDxY1DPFRykjls"
+    "_id": "7aBtUbAGZO87CG0Oj6AHfx"
   },
   {
     "__type__": "cc.TiledObjectGroup",
@@ -272,7 +272,7 @@
       "__id__": 5
     },
     "_enabled": true,
-    "_id": "092Gd2lytB2brJsAS1E8O2"
+    "_id": "ceDTM9kUlNKrtKisdvB0PP"
   },
   {
     "__type__": "cc.TiledMap",
@@ -319,6 +319,7 @@
     "wallPrefab4": {
       "__uuid__": "1fc75cb1-2e60-4b02-8302-e3312c8c204a"
     },
+    "Previous": null,
     "_id": "77GUU+MzhKsqsgHwhjVDEN"
   },
   {
