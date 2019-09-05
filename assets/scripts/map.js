@@ -132,19 +132,20 @@ cc.Class({
             }
             this.Previous = null;//换行后要重置
         }
+
+        //竖向合并碰撞体
         var childrens = this.node.children;
         for (var i = 0; i < childrens.length; i++) {
             // if (childrens[i].name == "wallPre") {
                 var iBoxCollider = childrens[i].getComponent(cc.BoxCollider);
                 if (iBoxCollider!=null){
-                    console.log("我是上面的墙",i);
+                    // console.log("我是上面的墙",i);
                     for (var j = i + 1; j < childrens.length; j++) {
-                        console.log((childrens[i].position.y - childrens[j].position.y));
                         var jBoxCollider = childrens[j].getComponent(cc.BoxCollider);
-                        if (jBoxCollider != null && iBoxCollider.size.width == jBoxCollider.size.width && childrens[i].position.x == childrens[j].position.x && (childrens[i].position.y - childrens[j].position.y) % 32 == 0) {
+                        if (jBoxCollider != null && childrens[i].position.x == childrens[j].position.x && iBoxCollider.size.width == jBoxCollider.size.width && childrens[i].position.y - iBoxCollider.size.height == childrens[j].position.y) {
                             iBoxCollider.offset.y -= 16;
                             iBoxCollider.size.height += 32;
-                            console.log("我是下面的墙,被清理了",j);
+                            // console.log("我是下面的墙,被清理了",j);
                             // childrens[j].removeComponent(cc.BoxCollider);
                             jBoxCollider.destroy();
                         }
