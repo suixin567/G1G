@@ -189,7 +189,7 @@
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_id": "682F0GMMVDtJJWyqFQj2d2"
+    "_id": "57xMwLjxJCLbMn67R3/bA9"
   },
   {
     "__type__": "cc.TiledLayer",
@@ -204,7 +204,7 @@
         "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
       }
     ],
-    "_id": "94AH3qBb5FG4TC6qLbhBrH"
+    "_id": "1fyv9Njq1ODYCHL/vskyR7"
   },
   {
     "__type__": "cc.Node",
@@ -262,7 +262,7 @@
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_id": "7aBtUbAGZO87CG0Oj6AHfx"
+    "_id": "297L5lBjNK3ZRhqHJCxhpG"
   },
   {
     "__type__": "cc.TiledObjectGroup",
@@ -272,7 +272,7 @@
       "__id__": 5
     },
     "_enabled": true,
-    "_id": "ceDTM9kUlNKrtKisdvB0PP"
+    "_id": "d2ttIFRDhOF4yGHBpTgIwv"
   },
   {
     "__type__": "cc.TiledMap",
@@ -484,7 +484,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -81.563,
+      "x": -138.467,
       "y": -157.832,
       "z": 0
     },
@@ -619,7 +619,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 170.792,
+      "x": 113.888,
       "y": -157.832,
       "z": 0
     },
@@ -979,8 +979,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 43.128,
-      "y": -126.363,
+      "x": -13.776,
+      "y": -247.931,
       "z": 0
     },
     "_scale": {
@@ -1144,8 +1144,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "前",
-    "_N$string": "前",
+    "_string": "开始",
+    "_N$string": "开始",
     "_fontSize": 20,
     "_lineHeight": 40,
     "_enableWrapText": false,

@@ -65,6 +65,7 @@ cc.Class({
     },
 
     onLoad: function () {
+        console.log("计算",64%32);
         //获取地图
         this.tiledMap = this.node.getComponent(cc.TiledMap);
         // console.log("地图完整属性",this.tiledMap);
@@ -89,21 +90,18 @@ cc.Class({
                          var loadobj = null;
                          switch (collisionType){
                              case 1:
-                                 loadobj = cc.instantiate(this.wallPrefab);//将预制体克隆到场景
                                  // loadobj.getComponent("Wall").Previous = this.Previous;
                                  if (this.Previous == null) {
+                                     loadobj = cc.instantiate(this.wallPrefab);//将预制体克隆到场景
                                      var boxCollider = loadobj.addComponent(cc.BoxCollider);
                                      boxCollider.size.width = 32;
                                      boxCollider.size.height = 32;
                                      this.Previous = loadobj;
                                  }else{
                                      var boxCollider = this.Previous.getComponent(cc.BoxCollider);
-                                     if (boxCollider != null) {
-                                         boxCollider.offset.x += 16;
-                                         boxCollider.size.width += 32;
-                                     }
+                                     boxCollider.offset.x += 16;
+                                     boxCollider.size.width += 32;
                                  }
-
                                  break;
                              case 2:
                                  loadobj =cc.instantiate(this.wallPrefab1);//将预制体克隆到场景
@@ -122,9 +120,11 @@ cc.Class({
                                  this.Previous = null;
                                  break;
                          }
-                         //设置碰撞体位置
-                         this.node.addChild(loadobj);//将克隆出的物体作为子物体
-                         loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
+                         if(loadobj != null){
+                             //设置碰撞体位置
+                             this.node.addChild(loadobj);//将克隆出的物体作为子物体
+                             loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
+                         }
                      }
                 }else{
                     this.Previous = null;//黑块要重置
@@ -132,7 +132,27 @@ cc.Class({
             }
             this.Previous = null;//换行后要重置
         }
-
+        var childrens = this.node.children;
+        for (var i = 0; i < childrens.length; i++) {
+            // if (childrens[i].name == "wallPre") {
+                var iBoxCollider = childrens[i].getComponent(cc.BoxCollider);
+                if (iBoxCollider!=null){
+                    console.log("我是上面的墙",i);
+                    for (var j = i + 1; j < childrens.length; j++) {
+                        console.log((childrens[i].position.y - childrens[j].position.y));
+                        var jBoxCollider = childrens[j].getComponent(cc.BoxCollider);
+                        if (jBoxCollider != null && iBoxCollider.size.width == jBoxCollider.size.width && childrens[i].position.x == childrens[j].position.x && (childrens[i].position.y - childrens[j].position.y) % 32 == 0) {
+                            iBoxCollider.offset.y -= 16;
+                            iBoxCollider.size.height += 32;
+                            console.log("我是下面的墙,被清理了",j);
+                            // childrens[j].removeComponent(cc.BoxCollider);
+                            jBoxCollider.destroy();
+                        }
+                    }
+                }
+            // }
+        }
+        //getSiblingIndex
         //对象层
         let objLayer = this.tiledMap.getObjectGroup('objLayer');
         console.log("对象层",objLayer)
