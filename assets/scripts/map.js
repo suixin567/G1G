@@ -69,9 +69,29 @@ cc.Class({
     },
 
     onLoad: function () {
-        console.log("计算",64%32);
         //获取地图
         this.tiledMap = this.node.getComponent(cc.TiledMap);
+        let that = this;
+        var mgr = cc.find("mgr");
+        var mapIndex = mgr.getComponent("Mgr").mapIndex
+        cc.loader.loadRes('map'+mapIndex, function (err, map) {
+            // 资源加载完成，为地图组件设置地图资源
+            that.tiledMap.tmxAsset = map;
+            that.processMap();
+        });
+    },
+
+    //下一关
+    nextMap: function (mapIndex) {
+        let that = this;
+        cc.loader.loadRes('map'+mapIndex, function (err, map) {
+            // 资源加载完成，为地图组件设置地图资源
+            that.tiledMap.tmxAsset = map;
+            that.processMap();
+        });
+    },
+
+    processMap:function () {
         // console.log("地图完整属性",this.tiledMap);
         //console.log("地图属性",this.tiledMap.getProperty("minTime"))
 
@@ -86,51 +106,51 @@ cc.Class({
                 // console.log(i,j);
                 var gid = bglayer.getTileGIDAt(j,i);//获得图块GID
                 if (gid != 0){
-                     //console.log("gid",gid)
-                     var properties = this.tiledMap.getPropertiesForGID(gid);
-                     var collisionType = properties['ct'];
-                     if (collisionType!= undefined){
-                         //console.log("图块碰撞类型" ,collisionType);
-                         let pos = bglayer.getPositionAt(j, i);
-                         var loadobj = null;
-                         switch (collisionType){
-                             case 1:
-                                 // loadobj.getComponent("Wall").Previous = this.Previous;
-                                 if (this.Previous == null) {
-                                     loadobj = cc.instantiate(this.wallPrefab);//将预制体克隆到场景
-                                     var boxCollider = loadobj.addComponent(cc.BoxCollider);
-                                     boxCollider.size.width = 32;
-                                     boxCollider.size.height = 32;
-                                     this.Previous = loadobj;
-                                 }else{
-                                     var boxCollider = this.Previous.getComponent(cc.BoxCollider);
-                                     boxCollider.offset.x += 16;
-                                     boxCollider.size.width += 32;
-                                 }
-                                 break;
-                             case 2:
-                                 loadobj =cc.instantiate(this.wallPrefab1);//将预制体克隆到场景
-                                 this.Previous = null;
-                                 break;
-                             case 3:
-                                 loadobj =cc.instantiate(this.wallPrefab2);//将预制体克隆到场景
-                                 this.Previous = null;
-                                 break;
-                             case 4:
-                                 loadobj =cc.instantiate(this.wallPrefab3);//将预制体克隆到场景
-                                 this.Previous = null;
-                                 break;
-                             case 5:
-                                 loadobj =cc.instantiate(this.wallPrefab4);//将预制体克隆到场景
-                                 this.Previous = null;
-                                 break;
-                         }
-                         if(loadobj != null){
-                             //设置碰撞体位置
-                             this.node.addChild(loadobj);//将克隆出的物体作为子物体
-                             loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
-                         }
-                     }
+                    //console.log("gid",gid)
+                    var properties = this.tiledMap.getPropertiesForGID(gid);
+                    var collisionType = properties['ct'];
+                    if (collisionType!= undefined){
+                        //console.log("图块碰撞类型" ,collisionType);
+                        let pos = bglayer.getPositionAt(j, i);
+                        var loadobj = null;
+                        switch (collisionType){
+                            case 1:
+                                // loadobj.getComponent("Wall").Previous = this.Previous;
+                                if (this.Previous == null) {
+                                    loadobj = cc.instantiate(this.wallPrefab);//将预制体克隆到场景
+                                    var boxCollider = loadobj.addComponent(cc.BoxCollider);
+                                    boxCollider.size.width = 32;
+                                    boxCollider.size.height = 32;
+                                    this.Previous = loadobj;
+                                }else{
+                                    var boxCollider = this.Previous.getComponent(cc.BoxCollider);
+                                    boxCollider.offset.x += 16;
+                                    boxCollider.size.width += 32;
+                                }
+                                break;
+                            case 2:
+                                loadobj =cc.instantiate(this.wallPrefab1);//将预制体克隆到场景
+                                this.Previous = null;
+                                break;
+                            case 3:
+                                loadobj =cc.instantiate(this.wallPrefab2);//将预制体克隆到场景
+                                this.Previous = null;
+                                break;
+                            case 4:
+                                loadobj =cc.instantiate(this.wallPrefab3);//将预制体克隆到场景
+                                this.Previous = null;
+                                break;
+                            case 5:
+                                loadobj =cc.instantiate(this.wallPrefab4);//将预制体克隆到场景
+                                this.Previous = null;
+                                break;
+                        }
+                        if(loadobj != null){
+                            //设置碰撞体位置
+                            this.node.addChild(loadobj);//将克隆出的物体作为子物体
+                            loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
+                        }
+                    }
                 }else{
                     this.Previous = null;//黑块要重置
                 }
@@ -142,20 +162,20 @@ cc.Class({
         var childrens = this.node.children;
         for (var i = 0; i < childrens.length; i++) {
             // if (childrens[i].name == "wallPre") {
-                var iBoxCollider = childrens[i].getComponent(cc.BoxCollider);
-                if (iBoxCollider!=null){
-                    // console.log("我是上面的墙",i);
-                    for (var j = i + 1; j < childrens.length; j++) {
-                        var jBoxCollider = childrens[j].getComponent(cc.BoxCollider);
-                        if (jBoxCollider != null && childrens[i].position.x == childrens[j].position.x && iBoxCollider.size.width == jBoxCollider.size.width && childrens[i].position.y - iBoxCollider.size.height == childrens[j].position.y) {
-                            iBoxCollider.offset.y -= 16;
-                            iBoxCollider.size.height += 32;
-                            // console.log("我是下面的墙,被清理了",j);
-                            // childrens[j].removeComponent(cc.BoxCollider);
-                            jBoxCollider.destroy();
-                        }
+            var iBoxCollider = childrens[i].getComponent(cc.BoxCollider);
+            if (iBoxCollider!=null){
+                // console.log("我是上面的墙",i);
+                for (var j = i + 1; j < childrens.length; j++) {
+                    var jBoxCollider = childrens[j].getComponent(cc.BoxCollider);
+                    if (jBoxCollider != null && childrens[i].position.x == childrens[j].position.x && iBoxCollider.size.width == jBoxCollider.size.width && childrens[i].position.y - iBoxCollider.size.height == childrens[j].position.y) {
+                        iBoxCollider.offset.y -= 16;
+                        iBoxCollider.size.height += 32;
+                        // console.log("我是下面的墙,被清理了",j);
+                        // childrens[j].removeComponent(cc.BoxCollider);
+                        jBoxCollider.destroy();
                     }
                 }
+            }
             // }
         }
         //背景层end

@@ -27,6 +27,7 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        mapIndex:0,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -34,35 +35,8 @@ cc.Class({
     // onLoad () {},
 
     start () {
-    // Get the collision manager.
-            let manager = cc.director.getCollisionManager();
 
-    // Enabled the colider manager.
-            manager.enabled = true;
-
-    // Enabled draw collider
-            manager.enabledDebugDraw = true;
-
-    // Enabled draw collider bounding box
-    //         manager.enabledDrawBoundingBox = true;
     },
 
     // update (dt) {},
-
-    onCollisionEnter: function (other, self) {
-        // this.node.color = cc.Color.RED;
-        console.log(other.name);
-        if (other.node.name.startsWith("wall")){
-            var player = this.getComponent('Player');
-            this.node.setPosition(player._StartPos);
-            this.node.angle =player._StartRot;
-        } else if(other.name.startsWith("finish")){
-            //切换场景
-            var mgr = cc.find("mgr");
-            mgr.getComponent("Mgr").mapIndex ++;
-            var map = cc.find("map");
-            map.getComponent("Map").nextMap(mgr.getComponent("Mgr").mapIndex);
-            //cc.director.loadScene("map2");
-        }
-    },
 });
