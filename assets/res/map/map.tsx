@@ -26,4 +26,14 @@
    <property name="ct" type="int" value="5"/>
   </properties>
  </tile>
+ <tile id="5">
+  <properties>
+   <property name="finish" type="bool" value="true"/>
+  </properties>
+ </tile>
+ <tile id="6">
+  <properties>
+   <property name="finish" type="bool" value="true"/>
+  </properties>
+ </tile>
 </tileset>

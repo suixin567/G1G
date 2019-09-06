@@ -51,10 +51,14 @@ cc.Class({
 
     onCollisionEnter: function (other, self) {
         // this.node.color = cc.Color.RED;
-        //切换场景
-        //cc.director.loadScene("game");
-        var player = this.getComponent('Player');
-        this.node.setPosition(player._StartPos);
-        this.node.angle =player._StartRot;
+        console.log(other.name);
+        if (other.node.name.startsWith("wall")){
+            var player = this.getComponent('Player');
+            this.node.setPosition(player._StartPos);
+            this.node.angle =player._StartRot;
+        } else if(other.name.startsWith("finish")){
+            //切换场景
+            cc.director.loadScene("map2");
+        }
     },
 });

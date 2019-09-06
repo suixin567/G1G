@@ -58,6 +58,10 @@ cc.Class({
             type: cc.Prefab,
             default: null,
         },
+        finishPrefab:{
+            type: cc.Prefab,
+            default: null,
+        },
         Previous: {
             type:cc.Node,
             default: null,
@@ -73,6 +77,7 @@ cc.Class({
 
         var mapSize = this.tiledMap.getMapSize();
         // console.log("地图大小",mapSize);
+        //背景层
         var bglayer = this.tiledMap.getLayer("bgLayer");
         console.log("背景层",bglayer)
 
@@ -153,7 +158,9 @@ cc.Class({
                 }
             // }
         }
-        //getSiblingIndex
+        //背景层end
+
+
         //对象层
         let objLayer = this.tiledMap.getObjectGroup('objLayer');
         console.log("对象层",objLayer)
@@ -164,6 +171,46 @@ cc.Class({
         console.log("对象层的角色",player)
         this.Player.getComponent("Player").StartPos = this.startPos;
         this.Player.getComponent("Player").StartRot = player.rotation;
+
+
+        //前景层
+        this.Previous == null;
+        var forlayer = this.tiledMap.getLayer("forLayer");
+        console.log("前景层",forlayer)
+        for (var i=0;i<mapSize.width;i++) {
+            for (var j = 0; j < mapSize.height; j++) {
+                // console.log(i,j);
+                var gid = forlayer.getTileGIDAt(j, i);//获得图块GID
+                if (gid != 0) {
+                    //console.log("gid",gid)
+                    var properties = this.tiledMap.getPropertiesForGID(gid);
+                    let pos = forlayer.getPositionAt(j, i);
+                    var loadobj = null;
+                    //终点物体
+                    if (properties['finish'] != undefined) {
+                        if (this.Previous == null) {
+                            loadobj = cc.instantiate(this.finishPrefab);//将预制体克隆到场景
+                            var boxCollider = loadobj.addComponent(cc.BoxCollider);
+                            boxCollider.size.width = 32;
+                            boxCollider.size.height = 32;
+                            this.Previous = loadobj;
+                        } else {
+                            var boxCollider = this.Previous.getComponent(cc.BoxCollider);
+                            boxCollider.offset.x += 16;
+                            boxCollider.size.width += 32;
+                        }
+                    }
+                    if(loadobj != null){
+                        //设置碰撞体位置
+                        this.node.addChild(loadobj);//将克隆出的物体作为子物体
+                        loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
+                    }
+                }else{
+                    this.Previous = null
+                }
+            }
+            this.Previous = null
+        }
     },
 
 });
