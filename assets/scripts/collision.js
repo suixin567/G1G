@@ -58,6 +58,9 @@ cc.Class({
             this.node.angle =player._StartRot;
         } else if(other.name.startsWith("finish")){
             //切换场景
+            var player = this.getComponent('Player');
+            player.speed = 0;
+            player.isRun = false;
             var mgr = cc.find("mgr");
             mgr.getComponent("Mgr").mapIndex ++;
             var map = cc.find("map");

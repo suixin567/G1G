@@ -65,6 +65,14 @@ cc.Class({
         Previous: {
             type:cc.Node,
             default: null,
+        },
+        bgLayerHolder:{
+            type:cc.Node,
+            default: null,
+        },
+        forLayerHolder:{
+            type:cc.Node,
+            default: null,
         }
     },
 
@@ -83,6 +91,9 @@ cc.Class({
 
     //下一关
     nextMap: function (mapIndex) {
+        //清空上一个地图的碰撞体
+        this.bgLayerHolder.destroyAllChildren();
+        this.forLayerHolder.destroyAllChildren();
         let that = this;
         cc.loader.loadRes('map'+mapIndex, function (err, map) {
             // 资源加载完成，为地图组件设置地图资源
@@ -147,7 +158,7 @@ cc.Class({
                         }
                         if(loadobj != null){
                             //设置碰撞体位置
-                            this.node.addChild(loadobj);//将克隆出的物体作为子物体
+                            this.bgLayerHolder.addChild(loadobj);//将克隆出的物体作为子物体
                             loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
                         }
                     }
@@ -159,7 +170,7 @@ cc.Class({
         }
 
         //竖向合并碰撞体
-        var childrens = this.node.children;
+        var childrens = this.bgLayerHolder.children;
         for (var i = 0; i < childrens.length; i++) {
             // if (childrens[i].name == "wallPre") {
             var iBoxCollider = childrens[i].getComponent(cc.BoxCollider);
@@ -222,7 +233,7 @@ cc.Class({
                     }
                     if(loadobj != null){
                         //设置碰撞体位置
-                        this.node.addChild(loadobj);//将克隆出的物体作为子物体
+                        this.forLayerHolder.addChild(loadobj);//将克隆出的物体作为子物体
                         loadobj.setPosition(cc.v2(pos.x + 16,pos.y + 16));
                     }
                 }else{
@@ -230,6 +241,27 @@ cc.Class({
                 }
             }
             this.Previous = null
+        }
+
+        //竖向合并碰撞体
+        childrens = this.forLayerHolder.children;
+        for (var i = 0; i < childrens.length; i++) {
+            // if (childrens[i].name == "wallPre") {
+            var iBoxCollider = childrens[i].getComponent(cc.BoxCollider);
+            if (iBoxCollider!=null){
+                // console.log("我是上面的墙",i);
+                for (var j = i + 1; j < childrens.length; j++) {
+                    var jBoxCollider = childrens[j].getComponent(cc.BoxCollider);
+                    if (jBoxCollider != null && childrens[i].position.x == childrens[j].position.x && iBoxCollider.size.width == jBoxCollider.size.width && childrens[i].position.y - iBoxCollider.size.height == childrens[j].position.y) {
+                        iBoxCollider.offset.y -= 16;
+                        iBoxCollider.size.height += 32;
+                        // console.log("我是下面的墙,被清理了",j);
+                        // childrens[j].removeComponent(cc.BoxCollider);
+                        jBoxCollider.destroy();
+                    }
+                }
+            }
+            // }
         }
     },
 

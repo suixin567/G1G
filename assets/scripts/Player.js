@@ -7,7 +7,8 @@ cc.Class({
         Button_right   : cc.Node,
         Button_go      : cc.Node,
         // 速度
-        max_speed      : 10,
+        speed          : 0,
+        max_speed      : 3,
         StartPos:{
             type: cc.v2,
             set (value) {
