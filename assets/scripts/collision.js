@@ -63,7 +63,7 @@ cc.Class({
             player.isRun = false;
             var mgr = cc.find("mgr");
             mgr.getComponent("Mgr").mapIndex ++;
-            var map = cc.find("map");
+            var map = cc.find("Canvas/map");
             map.getComponent("Map").nextMap(mgr.getComponent("Mgr").mapIndex);
             //cc.director.loadScene("map2");
         }
