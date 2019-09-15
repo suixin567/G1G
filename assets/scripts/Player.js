@@ -6,6 +6,9 @@ cc.Class({
         Button_left    : cc.Node,
         Button_right   : cc.Node,
         Button_go      : cc.Node,
+        pauseButton    : cc.Node,
+        stopButton     : cc.Node,
+
         // 速度
         speed          : 0,
         max_speed      : 3,
@@ -30,17 +33,22 @@ cc.Class({
         // 目前速度
         this.speed = 0;
         // 主角状态开关
-        this.isRun = false;
+        this.go = false;
+        this.run = false;
         this.isLeft = false;
         this.isRight = false;
         //this.node.setPosition(cc.visibleRect.bottomLeft);
+        this.pauseButton.active = false;
+        this.stopButton.active = false;
     },
 
     start () {
         // 3个按钮监听
-        this.Button_go.on('touchstart',this._go,this);
+        this.Button_go.on('click',this._go,this);
         this.Button_left.on('touchstart',this._left,this);
         this.Button_right.on('touchstart',this._right,this);
+        this.pauseButton.on('click',this._pause,this);
+        this.stopButton.on('click',this._stop,this);
         // 松手
         // this.Button_go.on('touchend',this._go_end,this);
         this.Button_left.on('touchend',this._left_end,this);
@@ -48,7 +56,10 @@ cc.Class({
     },
 
     update (dt) {
-        if (this.isRun) {
+        if(!this.run){
+            return;
+        }
+        if (this.go) {
             // 加速
             if (this.speed < this.max_speed) {
                 this.speed += 3 * dt;
@@ -77,11 +88,32 @@ cc.Class({
         // console.log(this.speed);
     },
 
-    _go () {this.isRun = true;},
+    _go () {
+        this.run = !this.run;
+        if (!this.run){
+            return;
+        }
+        this.go = true;
+        this.Button_go.active = false;
+        this.pauseButton.active = true;
+        this.stopButton.active = true;
+        },
     // _go_end () {this.isRun = false;},
     _left () {this.isLeft = true;this.isRight=false;},
     _left_end () {this.isLeft = false;},
     _right () {this.isRight = true;this.isLeft=false;},
     _right_end () {this.isRight = false;},
+
+    _pause () {
+        this.run = !this.run;
+        if (this.run){
+            cc.find( 'Background/Label', this.pauseButton).getComponent(cc.Label).string  = "暂停";
+        } else{
+            cc.find( 'Background/Label', this.pauseButton).getComponent(cc.Label).string  = "恢复";
+        }
+        },
+    _stop () {
+        cc.director.loadScene("start");
+    },
 
 });

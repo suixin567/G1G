@@ -70,6 +70,6 @@
 </data>
  </layer>
  <objectgroup name="objLayer">
-  <object id="1" name="player" x="75.6667" y="482.667" width="32" height="32" rotation="-90"/>
+  <object id="1" name="player" x="79.6667" y="128.667" width="32" height="32" rotation="-90"/>
  </objectgroup>
 </map>

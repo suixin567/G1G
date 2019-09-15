@@ -65,7 +65,6 @@ cc.Class({
             mgr.getComponent("Mgr").mapIndex ++;
             var map = cc.find("Canvas/map");
             map.getComponent("Map").nextMap(mgr.getComponent("Mgr").mapIndex);
-            //cc.director.loadScene("map2");
         }
     },
 });
