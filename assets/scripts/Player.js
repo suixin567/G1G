@@ -1,7 +1,11 @@
-cc.Class({
+var Player = cc.Class({
     extends: cc.Component,
 
-    properties: {
+    properties:()=>({
+        mgr: {
+            default: null,
+            type: require("Mgr")
+        },
         Player         : cc.Node,
         Button_left    : cc.Node,
         Button_right   : cc.Node,
@@ -27,7 +31,7 @@ cc.Class({
                 this.node.angle = value;
             }
         },
-    },
+    }),
 
     onLoad () {
         // 目前速度
@@ -53,6 +57,7 @@ cc.Class({
         // this.Button_go.on('touchend',this._go_end,this);
         this.Button_left.on('touchend',this._left_end,this);
         this.Button_right.on('touchend',this._right_end,this);
+        console.log("不啊",this.mgr.player.max_speed)
     },
 
     update (dt) {
@@ -117,3 +122,4 @@ cc.Class({
     },
 
 });
+module.exports = Player;

@@ -104,7 +104,7 @@ cc.Class({
 
     processMap:function () {
         // console.log("地图完整属性",this.tiledMap);
-        //console.log("地图属性",this.tiledMap.getProperty("minTime"))
+        console.log("地图通过时间",this.tiledMap.getProperty("time"))
 
         var mapSize = this.tiledMap.getMapSize();
         // console.log("地图大小",mapSize);

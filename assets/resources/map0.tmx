@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" nextobjectid="7">
+ <properties>
+  <property name="time" type="int" value="50"/>
+ </properties>
  <tileset firstgid="1" source="map.tsx"/>
  <layer name="bgLayer" width="30" height="30">
   <data encoding="csv">
