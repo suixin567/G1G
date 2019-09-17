@@ -47,6 +47,7 @@ var Player = cc.Class({
     },
 
     start () {
+        console.log("player初始化",this.mgr.player.max_speed)
         // 3个按钮监听
         this.Button_go.on('click',this._go,this);
         this.Button_left.on('touchstart',this._left,this);
@@ -57,7 +58,6 @@ var Player = cc.Class({
         // this.Button_go.on('touchend',this._go_end,this);
         this.Button_left.on('touchend',this._left_end,this);
         this.Button_right.on('touchend',this._right_end,this);
-        console.log("不啊",this.mgr.player.max_speed)
     },
 
     update (dt) {
@@ -94,6 +94,7 @@ var Player = cc.Class({
     },
 
     _go () {
+        this.mgr.levelStart();
         this.run = !this.run;
         if (!this.run){
             return;

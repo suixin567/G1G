@@ -5,10 +5,19 @@ var Mgr = cc.Class({
             default: null,
             type: require("Player")
         },
+        uiRoot: {
+            default: null,
+            type: require("UIRoot")
+        },
         mapIndex:0
     }),
     start () {
-      console.log("dsf",this.player.max_speed);
+        console.log("MGR初始化",this.player.max_speed);
+        console.log("MGR初始化",this.uiRoot.uiName);
     },
+    levelStart(){
+        console.log("Mgr关卡开始了");
+        this.uiRoot.levelStart();
+    }
 });
 module.exports = Mgr;
