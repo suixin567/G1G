@@ -15,6 +15,11 @@ var Mgr = cc.Class({
         console.log("MGR初始化",this.player.max_speed);
         console.log("MGR初始化",this.uiRoot.uiName);
     },
+    initFromMap(mapDate){
+        //设置关卡需要时间
+        this.uiRoot.levelTime(mapDate.time);
+        console.log("laimap初始化",mapDate);
+    },
     levelStart(){
         console.log("Mgr关卡开始了");
         this.uiRoot.levelStart();

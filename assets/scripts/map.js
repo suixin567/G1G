@@ -11,22 +11,11 @@
 cc.Class({
     extends: cc.Component,
 
-    properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+    properties: () => ( {
+        mgr: {
+            default: null,
+            type: require("Mgr")
+        },
         tiledMap:{
             type: cc.TiledMap,
             default: null,
@@ -74,7 +63,7 @@ cc.Class({
             type:cc.Node,
             default: null,
         }
-    },
+    }),
 
     onLoad: function () {
         //获取地图
@@ -104,8 +93,9 @@ cc.Class({
 
     processMap:function () {
         // console.log("地图完整属性",this.tiledMap);
-        console.log("地图通过时间",this.tiledMap.getProperty("time"))
-
+        //解析地图属性
+        var mapDate = {time :this.tiledMap.getProperty("time"),heart:6}
+        this.mgr.initFromMap(mapDate);
         var mapSize = this.tiledMap.getMapSize();
         // console.log("地图大小",mapSize);
         //背景层

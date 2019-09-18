@@ -503,6 +503,9 @@
       "__id__": 7
     },
     "_enabled": true,
+    "mgr": {
+      "__id__": 3
+    },
     "tiledMap": null,
     "startPos": {
       "__type__": "cc.Vec2",
@@ -2720,17 +2723,17 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 106,
+      "width": 89,
       "height": 50.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -140.64,
+      "x": -193.099,
       "y": 10.604,
       "z": 0
     },
@@ -2768,8 +2771,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "限定时间：00:00",
-    "_N$string": "限定时间：00:00",
+    "_string": "限定时间：0 s",
+    "_N$string": "限定时间：0 s",
     "_fontSize": 14,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -2777,7 +2780,7 @@
     "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_batchAsBitmap": false,
-    "_N$horizontalAlign": 1,
+    "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
@@ -2810,17 +2813,17 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 106,
+      "width": 89,
       "height": 50.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -140.64,
+      "x": -192.788,
       "y": -8.551,
       "z": 0
     },
@@ -2858,8 +2861,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "已用时间：00:00",
-    "_N$string": "已用时间：00:00",
+    "_string": "已用时间：0 s",
+    "_N$string": "已用时间：0 s",
     "_fontSize": 14,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -2867,7 +2870,7 @@
     "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_batchAsBitmap": false,
-    "_N$horizontalAlign": 1,
+    "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
@@ -3127,6 +3130,10 @@
       "__id__": 17
     },
     "_enabled": true,
+    "uiName": "hello",
+    "levelTimeLabel": {
+      "__id__": 55
+    },
     "_id": "2brjX8oDRPGoBFF6XF3xNx"
   },
   {

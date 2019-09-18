@@ -12,7 +12,11 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        uiName:"hello"
+        uiName:"hello",
+        levelTimeLabel :{
+            type : cc.Label,
+            default:null,
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -25,7 +29,12 @@ cc.Class({
 
     levelStart(){
         console.log("UI关卡开始了");
-    }
+    },
+
+    //设置关卡需要时间
+    levelTime(time){
+        this.levelTimeLabel.string = "限定时间: " + time+ " s";
+    },
     // update (dt) {},
 
     //UI ROOT 脚本应支持 1根据数据创建UI  2开始计时 3暂停
