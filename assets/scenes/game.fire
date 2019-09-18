@@ -132,6 +132,9 @@
       "__id__": 64
     },
     "mapIndex": 0,
+    "needTime": 0,
+    "usedTime": 0,
+    "run": false,
     "_id": "36J+2eL0lEy6GtnCC3rDgS"
   },
   {
@@ -145,23 +148,11 @@
     "mgr": {
       "__id__": 3
     },
-    "Player": {
-      "__id__": 5
-    },
     "Button_left": {
       "__id__": 18
     },
     "Button_right": {
       "__id__": 25
-    },
-    "Button_go": {
-      "__id__": 32
-    },
-    "pauseButton": {
-      "__id__": 39
-    },
-    "stopButton": {
-      "__id__": 46
     },
     "speed": 0,
     "max_speed": 3,
@@ -2789,7 +2780,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "timeLabel",
+    "_name": "usedTimeLabel",
     "_objFlags": 0,
     "_parent": {
       "__id__": 53
@@ -2879,7 +2870,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "needTimeLabel",
+    "_name": "dimeLabel",
     "_objFlags": 0,
     "_parent": {
       "__id__": 53
@@ -2969,7 +2960,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "timeLabel",
+    "_name": "fLabel",
     "_objFlags": 0,
     "_parent": {
       "__id__": 53
@@ -3130,9 +3121,23 @@
       "__id__": 17
     },
     "_enabled": true,
-    "uiName": "hello",
-    "levelTimeLabel": {
+    "mgr": {
+      "__id__": 3
+    },
+    "startButton": {
+      "__id__": 32
+    },
+    "pauseButton": {
+      "__id__": 39
+    },
+    "stopButton": {
+      "__id__": 46
+    },
+    "needTimeLabel": {
       "__id__": 55
+    },
+    "usedTimeLabel": {
+      "__id__": 57
     },
     "_id": "2brjX8oDRPGoBFF6XF3xNx"
   },
@@ -3214,6 +3219,10 @@
       "__id__": 5
     },
     "_enabled": true,
+    "mgr": {
+      "__id__": 3
+    },
+    "player": null,
     "_id": "33IWAAKChDsaLiGo94i5QQ"
   }
 ]

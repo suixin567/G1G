@@ -12,26 +12,21 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        mgr: {
+            default: null,
+            type: require("Mgr")
+        },
+        _player: {
+            default: null,
+            type: require("Player")
+        },
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        this.player = this.getComponent('Player');
+    },
 
     start () {
     // Get the collision manager.
@@ -53,18 +48,15 @@ cc.Class({
         // this.node.color = cc.Color.RED;
         console.log(other.name);
         if (other.node.name.startsWith("wall")){
-            var player = this.getComponent('Player');
-            this.node.setPosition(player._StartPos);
-            this.node.angle =player._StartRot;
+            this.node.setPosition(this.player._StartPos);
+            this.node.angle = this.player._StartRot;
+            this.mgr.reStart();
         } else if(other.name.startsWith("finish")){
             //切换场景
-            var player = this.getComponent('Player');
-            player.speed = 0;
-            player.isRun = false;
-            var mgr = cc.find("mgr");
-            mgr.getComponent("Mgr").mapIndex ++;
+            this.player.speed = 0;
+            this.mgr.mapIndex ++;
             var map = cc.find("Canvas/map");
-            map.getComponent("Map").nextMap(mgr.getComponent("Mgr").mapIndex);
+            map.getComponent("Map").nextMap(this.mgr.mapIndex);
         }
     },
 });
