@@ -36,4 +36,9 @@
    <property name="finish" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="7">
+  <properties>
+   <property name="heart" type="bool" value="true"/>
+  </properties>
+ </tile>
 </tileset>
