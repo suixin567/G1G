@@ -135,6 +135,8 @@
     "needTime": 0,
     "usedTime": 0,
     "run": false,
+    "needHeart": 0,
+    "collectedHeart": 0,
     "_id": "36J+2eL0lEy6GtnCC3rDgS"
   },
   {
@@ -524,7 +526,10 @@
     "finishPrefab": {
       "__uuid__": "da283875-4fc6-4e63-9487-d3532bdf06eb"
     },
-    "Previous": null,
+    "heartPrefab": {
+      "__uuid__": "d37c2b3b-9271-4f5b-880e-4d49e0e0e2d9"
+    },
+    "_Previous": null,
     "bgLayerHolder": {
       "__id__": 9
     },
@@ -2870,7 +2875,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "dimeLabel",
+    "_name": "needHeartLabel",
     "_objFlags": 0,
     "_parent": {
       "__id__": 53
@@ -2894,17 +2899,17 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 92,
+      "width": 120,
       "height": 50.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -16.122,
+      "x": -45.937,
       "y": 10.604,
       "z": 0
     },
@@ -2942,8 +2947,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "需要红心：5个",
-    "_N$string": "需要红心：5个",
+    "_string": "需要收集红心：0个",
+    "_N$string": "需要收集红心：0个",
     "_fontSize": 14,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -2960,7 +2965,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "fLabel",
+    "_name": "collectedHeartLabel",
     "_objFlags": 0,
     "_parent": {
       "__id__": 53
@@ -2989,12 +2994,12 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -8.234,
+      "x": -46.788,
       "y": -8.551,
       "z": 0
     },
@@ -3032,8 +3037,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "已得到红心：2个",
-    "_N$string": "已得到红心：2个",
+    "_string": "已得到红心：0个",
+    "_N$string": "已得到红心：0个",
     "_fontSize": 14,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -3139,6 +3144,12 @@
     "usedTimeLabel": {
       "__id__": 57
     },
+    "needHeartLabel": {
+      "__id__": 59
+    },
+    "collectedHeartLabel": {
+      "__id__": 61
+    },
     "_id": "2brjX8oDRPGoBFF6XF3xNx"
   },
   {
@@ -3222,7 +3233,7 @@
     "mgr": {
       "__id__": 3
     },
-    "player": null,
+    "_player": null,
     "_id": "33IWAAKChDsaLiGo94i5QQ"
   }
 ]

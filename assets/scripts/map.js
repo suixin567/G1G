@@ -51,7 +51,11 @@ cc.Class({
             type: cc.Prefab,
             default: null,
         },
-        Previous: {
+        heartPrefab:{
+            type: cc.Prefab,
+            default: null,
+        },
+        _Previous: {
             type:cc.Node,
             default: null,
         },
@@ -94,7 +98,11 @@ cc.Class({
     processMap:function () {
         // console.log("地图完整属性",this.tiledMap);
         //解析地图属性
-        var mapDate = {time :this.tiledMap.getProperty("time"),heart:6}
+        var mapDate =
+            {
+            time :this.tiledMap.getProperty("time"),
+            heart:this.tiledMap.getProperty("heart"),
+            }
         this.mgr.initFromMap(mapDate);
         var mapSize = this.tiledMap.getMapSize();
         // console.log("地图大小",mapSize);
@@ -211,6 +219,19 @@ cc.Class({
                     if (properties['finish'] != undefined) {
                         if (this.Previous == null) {
                             loadobj = cc.instantiate(this.finishPrefab);//将预制体克隆到场景
+                            var boxCollider = loadobj.addComponent(cc.BoxCollider);
+                            boxCollider.size.width = 32;
+                            boxCollider.size.height = 32;
+                            this.Previous = loadobj;
+                        } else {
+                            var boxCollider = this.Previous.getComponent(cc.BoxCollider);
+                            boxCollider.offset.x += 16;
+                            boxCollider.size.width += 32;
+                        }
+                    }
+                    if (properties['heart'] != undefined) {
+                        if (this.Previous == null) {
+                            loadobj = cc.instantiate(this.heartPrefab);//将预制体克隆到场景
                             var boxCollider = loadobj.addComponent(cc.BoxCollider);
                             boxCollider.size.width = 32;
                             boxCollider.size.height = 32;

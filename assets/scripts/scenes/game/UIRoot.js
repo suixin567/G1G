@@ -28,6 +28,14 @@ cc.Class({
         usedTimeLabel :{
             type : cc.Label,
             default:null,
+        },
+        needHeartLabel :{
+            type : cc.Label,
+            default:null,
+        },
+        collectedHeartLabel :{
+            type : cc.Label,
+            default:null,
         }
     },
 
@@ -74,7 +82,14 @@ cc.Class({
     levelUsedTime(time){
         this.usedTimeLabel.string = "已用时间: " + time+ " s";
     },
-    // update (dt) {},
 
-    //UI ROOT 脚本应支持 1根据数据创建UI  2开始计时 3暂停
+    //设置关卡需要红心
+    levelNeedHeart(value){
+        this.needHeartLabel.string = "需要收集红心: " + value+ " 个";
+    },
+
+    //设置关卡已收集红心
+    levelCollectedHeart(value){
+        this.collectedHeartLabel.string = "已收集红心: " + value+ " 个";
+    },
 });

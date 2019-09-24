@@ -13,7 +13,10 @@ var Mgr = cc.Class({
         needTime:0,//当前关卡限定时间
         usedTime:0,//当前关卡已用时间
         run:false,
+        needHeart:0,//需要红心
+        collectedHeart:0,//已收集红心
     }),
+
     start () {
         console.log("MGR初始化", this.player.max_speed);
         console.log("MGR初始化", this.uiRoot.uiName);
@@ -36,16 +39,34 @@ var Mgr = cc.Class({
         this.needTime = mapDate.time;
         this.usedTime = 0;
         this.uiRoot.levelNeedTime(this.needTime);
-        this.uiRoot.levelUsedTime(this.usedTime);
+        this.uiRoot.levelUsedTime(0);
+
+        this.needHeart = mapDate.heart;
+        this.collectedHeart = 0;
+        this.uiRoot.levelNeedHeart(this.needHeart);
+        this.uiRoot.levelCollectedHeart(0);
+    },
+    finish(){
+      if(this.collectedHeart<this.needHeart){
+          reStart();
+      }  else{
+          //切换场景
+          this.mapIndex ++;
+          var map = cc.find("Canvas/map");
+          map.getComponent("Map").nextMap(this.mapIndex);
+      }
     },
     //碰墙后重新开始
     reStart(){
         this.usedTime = 0;
-        this.uiRoot.levelUsedTime(this.usedTime);
-    }
-    // //关卡开始
-    // levelStart(){
-    //     this.run = !this.run;
-    // }
+        this.uiRoot.levelUsedTime(0);
+        this.collectedHeart = 0;
+        this.uiRoot.levelCollectedHeart(0);
+    },
+    //吃到红心
+    heart(){
+        this.collectedHeart++;
+        this.uiRoot.levelCollectedHeart(this.collectedHeart);
+    },
 });
 module.exports = Mgr;

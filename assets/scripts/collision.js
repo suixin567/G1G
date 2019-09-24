@@ -51,12 +51,15 @@ cc.Class({
             this.node.setPosition(this.player._StartPos);
             this.node.angle = this.player._StartRot;
             this.mgr.reStart();
-        } else if(other.name.startsWith("finish")){
-            //切换场景
+        }
+        else if(other.name.startsWith("finish")){
             this.player.speed = 0;
-            this.mgr.mapIndex ++;
-            var map = cc.find("Canvas/map");
-            map.getComponent("Map").nextMap(this.mgr.mapIndex);
+            this.mgr.finish();
+        }
+        else if(other.name.startsWith("heart")){
+            this.mgr.heart();
+            other.node.active = false;
+            console.log(other.node)
         }
     },
 });
