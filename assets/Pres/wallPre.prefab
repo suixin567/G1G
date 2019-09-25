@@ -19,13 +19,9 @@
     "_children": [],
     "_active": true,
     "_level": 1,
-    "_components": [
-      {
-        "__id__": 2
-      }
-    ],
+    "_components": [],
     "_prefab": {
-      "__id__": 3
+      "__id__": 2
     },
     "_opacity": 255,
     "_color": {
@@ -67,16 +63,6 @@
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_id": ""
-  },
-  {
-    "__type__": "f0f60Ur7B9GXoJktyVm9Erz",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
     "_id": ""
   },
   {

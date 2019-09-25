@@ -56,10 +56,5 @@ cc.Class({
             this.player.speed = 0;
             this.mgr.finish();
         }
-        else if(other.name.startsWith("heart")){
-            this.mgr.heart();
-            other.node.active = false;
-            console.log(other.node)
-        }
     },
 });

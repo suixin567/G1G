@@ -78,6 +78,9 @@ cc.Class({
         cc.loader.loadRes('map'+mapIndex, function (err, map) {
             // 资源加载完成，为地图组件设置地图资源
             that.tiledMap.tmxAsset = map;
+            //调整地图层的前后顺序
+            that.bgLayerHolder.setSiblingIndex(that.node.childrenCount-1);
+            that.forLayerHolder.setSiblingIndex(that.node.childrenCount-1);
             that.processMap();
         });
     },
@@ -91,6 +94,9 @@ cc.Class({
         cc.loader.loadRes('map'+mapIndex, function (err, map) {
             // 资源加载完成，为地图组件设置地图资源
             that.tiledMap.tmxAsset = map;
+            //调整地图层的前后顺序
+            that.bgLayerHolder.setSiblingIndex(that.node.childrenCount-1);
+            that.forLayerHolder.setSiblingIndex(that.node.childrenCount-1);
             that.processMap();
         });
     },
@@ -275,5 +281,13 @@ cc.Class({
             // }
         }
     },
+    //重新开始，需要重置道具
+    reStart:function (){
+        var props = this.forLayerHolder.children;
+        for (var i = 0; i < props.length; i++) {
+            props[i].opacity = 0;
+        }
+
+    }
 
 });

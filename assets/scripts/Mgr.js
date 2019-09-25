@@ -62,6 +62,9 @@ var Mgr = cc.Class({
         this.uiRoot.levelUsedTime(0);
         this.collectedHeart = 0;
         this.uiRoot.levelCollectedHeart(0);
+        //重新显示道具
+        var map = cc.find("Canvas/map");
+        map.getComponent("Map").reStart();
     },
     //吃到红心
     heart(){
